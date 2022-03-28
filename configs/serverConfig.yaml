@@ -1,0 +1,5 @@
+ip: "localhost"
+port: "8080"
+maxHeaderBytes: 1048576
+readTimeoutInSeconds: 10
+writeTimeoutInSeconds: 10
