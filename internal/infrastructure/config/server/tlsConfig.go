@@ -10,7 +10,7 @@ type TLSServerConfigEntity struct {
 func GetServerTLSConfig() (*TLSServerConfigEntity, error) {
 	entity := new(TLSServerConfigEntity)
 
-	config.ReadConfig("../../configs/server/tls.yaml", entity)
+	config.ReadConfig("../configs/server/tls.yaml", entity)
 
 	return entity, nil
 }

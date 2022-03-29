@@ -13,7 +13,7 @@ type CoreServerConfigEntity struct {
 func GetServerCoreConfig() (*CoreServerConfigEntity, error) {
 	entity := new(CoreServerConfigEntity)
 
-	config.ReadConfig("../../configs/server/core.yaml", entity)
+	config.ReadConfig("../configs/server/core.yaml", entity)
 
 	return entity, nil
 }
