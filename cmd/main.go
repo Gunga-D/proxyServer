@@ -4,28 +4,29 @@ import (
 	"log"
 
 	"github.com/Gunga-D/proxy-server/internal/app"
-	"github.com/Gunga-D/proxy-server/internal/infrastructure/config/server"
+	serverConfig "github.com/Gunga-D/proxy-server/internal/infrastructure/config/server"
 	"github.com/Gunga-D/proxy-server/internal/transport"
 )
 
 func main() {
-	serverCoreConfig, err := server.GetServerCoreConfig()
+	handler := transport.NewProxyHandler()
+
+	serverCoreConfig, err := serverConfig.GetServerCoreConfig()
 	if err != nil {
 		log.Fatalf("Server core config initialization error: %s", err.Error())
 	}
+	server := app.NewServer(handler, *serverCoreConfig)
 
-	serverTlsConfig, err := server.GetServerTLSConfig()
-	if err != nil {
-		log.Fatalf("Server tls config initialization error: %s", err.Error())
+	if serverCoreConfig.TransferProtocol == "https" {
+		serverTlsConfig, err := serverConfig.GetServerTLSConfig()
+		if err != nil {
+			log.Fatalf("Server tls config initialization error: %s", err.Error())
+		}
+		server.InitializeTLS(*serverTlsConfig)
 	}
 
-	handler := transport.NewProxyHandler()
-
-	server := app.NewServer(handler, *serverCoreConfig)
-	server.InitializeTLS(*serverTlsConfig)
 	err = server.Run()
 	if err != nil {
 		log.Fatalf("Server startup error: %s", err.Error())
 	}
-	log.Println("The server has been started!")
 }

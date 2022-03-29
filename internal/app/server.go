@@ -3,6 +3,7 @@ package app
 import (
 	"context"
 	"crypto/tls"
+	"log"
 	"net/http"
 	"time"
 
@@ -39,7 +40,9 @@ func (server *Server) Run() error {
 		TLSNextProto:   make(map[string]func(*http.Server, *tls.Conn, http.Handler)),
 	}
 
-	if server.tlsConfig != nil {
+	log.Println("Server has been started!")
+
+	if server.coreConfig.TransferProtocol == "https" {
 		return server.core.ListenAndServeTLS(server.tlsConfig.PemPath, server.tlsConfig.KeyPath)
 	}
 

@@ -3,11 +3,12 @@ package server
 import "github.com/Gunga-D/proxy-server/internal/infrastructure/config"
 
 type CoreServerConfigEntity struct {
-	Ip             string `yaml:"ip"`
-	Port           string `yaml:"port"`
-	MaxHeaderBytes int    `yaml:"maxHeaderBytes"`
-	ReadTimeout    int    `yaml:"readTimeoutInSeconds"`
-	WriteTimeout   int    `yaml:"writeTimeoutInSeconds"`
+	Ip               string `yaml:"ip"`
+	Port             string `yaml:"port"`
+	TransferProtocol string `yaml:"transferProtocol"`
+	MaxHeaderBytes   int    `yaml:"maxHeaderBytes"`
+	ReadTimeout      int    `yaml:"readTimeoutInSeconds"`
+	WriteTimeout     int    `yaml:"writeTimeoutInSeconds"`
 }
 
 func GetServerCoreConfig() (*CoreServerConfigEntity, error) {

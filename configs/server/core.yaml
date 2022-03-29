@@ -1,5 +1,6 @@
 ip: "localhost"
 port: "8080"
+transferProtocol: "http"
 maxHeaderBytes: 1048576
 readTimeoutInSeconds: 10
 writeTimeoutInSeconds: 10
